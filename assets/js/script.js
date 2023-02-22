@@ -4,6 +4,26 @@
 
 var now = dayjs().format('dddd, MMMM D, YYYY h:mm A')
 $('#currentDay').text(now);
+
+function createTimeBlocks() {
+  var hour = 0
+
+  for (var i = 0; i < 24; i++) {
+    if (hour < 10 ) {
+      console.log(hour)
+      hourMilitary = '0' + hour
+    } else {
+      console.log(hour)
+      hourMilitary = hour
+    }
+    var section = '<section id="hour-'+ hourMilitary + '" class="row time-block past"></section>'
+    hour = hour + 1
+    console.log(section)
+  }
+
+}
+
+createTimeBlocks()
 $(function () {
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
