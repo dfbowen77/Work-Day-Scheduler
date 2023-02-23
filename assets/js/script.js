@@ -2,6 +2,8 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
+var containerLgEl = $('.container-lg');
+
 var now = dayjs().format('dddd, MMMM D, YYYY h:mm A')
 $('#currentDay').text(now);
 
@@ -16,9 +18,40 @@ function createTimeBlocks() {
       console.log(hour)
       hourMilitary = hour
     }
-    var section = '<section id="hour-'+ hourMilitary + '" class="row time-block past"></section>'
+
+    var timeScheduleEl = $('<section>'); 
+    timeScheduleEl.attr('id', 'hour-' + hourMilitary)
+    timeScheduleEl.addClass('row time-block past')
+
+    var taskScheduleEl = $('<time>');
+    taskScheduleEl.addClass('col-2 col-md-1 hour text-center py-3')
+    taskScheduleEl.text(hourMilitary + ':00')
+
+    var timeAreaEl = $('<textarea>');
+    timeAreaEl.addClass('col-8 col-md-10 description')
+    timeAreaEl.attr('rows', 3)
+
+    var saveButtonEl = $('<button>')
+    saveButtonEl.addClass('btn saveBtn col-2 col-md-1')
+    saveButtonEl.attr('aria-label', 'save')
+
+    var saveIconEl = $('<i>')
+    // The fas fa-save is a font-awesome icon for the save button
+    saveIconEl.addClass('fas fa-save')
+    saveIconEl.attr('aria-hidden', 'true')
+
+    saveButtonEl.append(saveIconEl)
+
+    timeScheduleEl.append(taskScheduleEl)
+    timeScheduleEl.append(timeAreaEl)
+    timeScheduleEl.append(saveButtonEl)
+
+    containerLgEl.append(timeScheduleEl);
+
+  //   <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+  //   <i class="fas fa-save" aria-hidden="true"></i>
+  // </button>
     hour = hour + 1
-    console.log(section)
   }
 
 }
