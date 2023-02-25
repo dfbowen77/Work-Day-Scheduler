@@ -7,6 +7,9 @@ var containerLgEl = $('.container-lg');
 var now = dayjs().format('dddd, MMMM D, YYYY h:mm A')
 $('#currentDay').text(now);
 
+var hourNow = dayjs().hour()
+console.log(hourNow)
+
 function createTimeBlocks() {
   var hour = 0
 
@@ -19,9 +22,18 @@ function createTimeBlocks() {
       hourMilitary = hour
     }
 
+    if (hour < hourNow) {
+      timeWhen = 'past'
+    } else if (hour == hourNow) {
+      timeWhen = 'present'
+    } else {
+      timeWhen = 'future'
+    }
+    console.log(timeWhen)
+
     var timeScheduleEl = $('<section>'); 
     timeScheduleEl.attr('id', 'hour-' + hourMilitary)
-    timeScheduleEl.addClass('row time-block past')
+    timeScheduleEl.addClass('row time-block ' + timeWhen)
 
     var taskScheduleEl = $('<time>');
     taskScheduleEl.addClass('col-2 col-md-1 hour text-center py-3')
@@ -48,9 +60,6 @@ function createTimeBlocks() {
 
     containerLgEl.append(timeScheduleEl);
 
-  //   <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-  //   <i class="fas fa-save" aria-hidden="true"></i>
-  // </button>
     hour = hour + 1
   }
 
