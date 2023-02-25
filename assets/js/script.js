@@ -41,6 +41,7 @@ function createTimeBlocks() {
 
     var timeAreaEl = $('<textarea>');
     timeAreaEl.addClass('col-8 col-md-10 description')
+    timeAreaEl.attr('id', 'text-hour-' + hourMilitary)
     timeAreaEl.attr('rows', 3)
 
     var saveButtonEl = $('<button>')
@@ -60,12 +61,53 @@ function createTimeBlocks() {
 
     containerLgEl.append(timeScheduleEl);
 
+    daySchedule = JSON.parse(localStorage.getItem("daySchedule"));
+
+    if(daySchedule) {
+      for (var j = 0; j < daySchedule.length ; j++) { 
+        var hourEl = document.querySelector("#text-hour-" + hourMilitary);
+        var hourArea = daySchedule[j].hour
+        var hourDetails = daySchedule[j].details
+  
+       }
+
+    }
+    
+    // within this loop, j is used due to i being used within the same loop earlier. 
+
+
     hour = hour + 1
+
+    
+    $(saveButtonEl).on("click", saveEvent);
   }
 
 }
 
 createTimeBlocks()
+
+function saveEvent() {
+
+  var textArea = $(this).parent().children()[1];
+  var hourArea = $(this).parent().children()[1].id;
+
+  var hourDetails = {
+    hour : hourArea,
+    details : textArea.value
+}
+
+var daySchedule = JSON.parse(localStorage.getItem("daySchedule"));   
+        
+if(daySchedule){
+  daySchedule.push(hourDetails); 
+}
+else{
+  daySchedule = [hourDetails];    
+}
+
+localStorage.setItem("daySchedule",JSON.stringify(daySchedule));
+
+}
 $(function () {
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
