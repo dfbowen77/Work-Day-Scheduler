@@ -62,20 +62,7 @@ function createTimeBlocks() {
     containerLgEl.append(timeScheduleEl);
 
     daySchedule = JSON.parse(localStorage.getItem("daySchedule"));
-
-    if(daySchedule) {
-      for (var j = 0; j < daySchedule.length ; j++) { 
-        var hourEl = document.querySelector("#text-hour-" + hourMilitary);
-        var hourArea = daySchedule[j].hour
-        var hourDetails = daySchedule[j].details
-  
-       }
-
-    }
     
-    // within this loop, j is used due to i being used within the same loop earlier. 
-
-
     hour = hour + 1
 
     
@@ -94,38 +81,41 @@ function saveEvent() {
   var hourDetails = {
     hour : hourArea,
     details : textArea.value
+  }
+
+  var daySchedule = JSON.parse(localStorage.getItem("daySchedule"));   
+          
+  if(daySchedule){
+    daySchedule.push(hourDetails); 
+  }
+  else{
+    daySchedule = [hourDetails];    
+  }
+
+  localStorage.setItem("daySchedule",JSON.stringify(daySchedule));
+
 }
 
-var daySchedule = JSON.parse(localStorage.getItem("daySchedule"));   
-        
-if(daySchedule){
-  daySchedule.push(hourDetails); 
-}
-else{
-  daySchedule = [hourDetails];    
-}
+function loadSchedule () {
 
-localStorage.setItem("daySchedule",JSON.stringify(daySchedule));
+  var daySchedule = JSON.parse(localStorage.getItem("daySchedule"));
 
+  if(daySchedule) {
+    for (var i = 0; i < daySchedule.length ; i++) { 
+      var hourArea = daySchedule[i].hour
+      var hourDetails = daySchedule[i].details
+
+      var hourEl = document.querySelector("#" + hourArea);
+
+      console.log(hourArea)
+      console.log(hourDetails)
+      console.log(hourEl)
+
+    hourEl.textContent = hourDetails
+
+     }
+
+  }
 }
-$(function () {
-    // TODO: Add a listener for click events on the save button. This code should
-    // use the id in the containing time-block as a key to save the user input in
-    // local storage. HINT: What does `this` reference in the click listener
-    // function? How can DOM traversal be used to get the "hour-x" id of the
-    // time-block containing the button that was clicked? How might the id be
-    // useful when saving the description in local storage?
-    //
-    // TODO: Add code to apply the past, present, or future class to each time
-    // block by comparing the id to the current hour. HINTS: How can the id
-    // attribute of each time-block be used to conditionally add or remove the
-    // past, present, and future classes? How can Day.js be used to get the
-    // current hour in 24-hour time?
-    //
-    // TODO: Add code to get any user input that was saved in localStorage and set
-    // the values of the corresponding textarea elements. HINT: How can the id
-    // attribute of each time-block be used to do this?
-    //
-    // TODO: Add code to display the current date in the header of the page.
-  });
+loadSchedule()
   
