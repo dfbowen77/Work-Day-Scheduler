@@ -1,8 +1,10 @@
+/* adds styling to the body tag */
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
   }
   
+  /* adds styling to the textarea tags */
   textarea {
     background: transparent;
     border: none;
@@ -11,40 +13,47 @@ body {
     border-left: 1px solid black;
     padding: 10px;
   }
-  
+ 
+   /* adds styling to the description class */
   .description {
     white-space: pre-wrap;
   }
-  
+  /* adds styling to the time-block class */
   .time-block {
     border-radius: 15px;
   }
   
+   /* adds styling to the row class */
   .row {
     border-top: 1px solid white;
   }
   
+   /* adds styling to the hour class */
   .hour {
     background-color: #ffffff;
     color: #000000;
     border-top: 1px dashed #000000;
   }
   
+  /* adds styling to the past class so that the color changes depending on the time*/
   .past {
     background-color: #d3d3d3;
     color: white;
   }
   
+  /* adds styling to the present class so that the color changes depending on the time*/
   .present {
     background-color: #ff6961;
     color: white;
   }
   
+/* adds styling to the future class so that the color changes depending on the time*/
   .future {
     background-color: #77dd77;
     color: white;
   }
   
+  /* adds styling to the saveBtn class */
   .saveBtn {
     border-left: 1px solid black;
     border-top-right-radius: 15px;
@@ -52,7 +61,8 @@ body {
     background-color: #06aed5;
     color: white;
   }
-  
+
+  /* adds styling to the saveBtn class when being hovered over*/
   .saveBtn i:hover {
     font-size: 20px;
     transition: all 0.3s ease-in-out;
